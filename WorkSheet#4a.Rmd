@@ -1,0 +1,168 @@
+---
+title: "WorkSheet#4a"
+author: "Anton Geganzo"
+date: "2023-10-25"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+ShoeSizeDF <- data.frame(
+  Shoe_size = c(6.5,9.0,8.5,8.5,10.5,7.0,9.5,9.0,13.0,
+               7.5,10.5,8.5,12.0,10.5,13.0,11.5,8.5,5.0,
+               10.0,6.5,7.5,8.5,10.5,8.5,10.5,11.0,9.0,
+               13.0),
+  
+  Height = c(66.0,68.0,64.5,65.0,70.0,64.0,70.0,71.0,
+             72.0,64.0,74.5,67.0,71.0,71.0,77.0,72.0,
+             59.0,62.0,72.0,66.0,64.0,67.0,73.0,69.0,
+             72.0,70.0,69.0,70.0),
+  Gender = c("F","F","F","F","M","F","F","F","M","F","M","F",
+             "M","M","M","M","F","F","M","F","F","M","M","F",
+             "M","M","M","M")
+  
+)
+ShoeSizeDF
+```
+```{r subset male and female}
+subsetMale <- ShoeSizeDF[ShoeSizeDF$Shoe_size &  ShoeSizeDF$Height & ShoeSizeDF$Gender == "M",]
+subsetMale
+subsetFemale <- subset(ShoeSizeDF, Gender == "F")
+subsetFemale
+```
+
+```{r mean of  shoe size}
+SizeMeanMale<- mean(subsetMale$Shoe_size) 
+SizeMeanFemale <- mean(subsetFemale$Shoe_size) 
+totalSizeMean <- mean(ShoeSizeDF$Shoe_size)
+            
+cat("The mean of shoe sizes for males is:", SizeMeanMale)
+cat("\nThe mean of the shoe sizes for females is:",SizeMeanFemale)
+cat("\nThe total mean for shoe sizes is: ", totalSizeMean)
+```
+
+```{r mean of height}
+HeightMeanMale <- mean(subsetMale$Height)
+HeightMeanFemale <- mean(subsetFemale$Height)
+totalHeightMean <- mean(ShoeSizeDF$Height)
+  
+cat("The mean for height of males is:", HeightMeanMale)
+cat("\nThe mean of the height of females is:",HeightMeanFemale)
+cat("\nThe total mean for height is: ", totalHeightMean)
+cat("\n\nYes, there is a relationship between height and mean. The higher the height the bigger the shoe sizes")
+```
+
+```{r 2 Months}
+# Create a character vector of months
+months <- c(
+  "March", "April", "January", "November", "January",
+  "September", "October", "September", "November", "August",
+  "January", "November", "November", "February", "May", "August",
+  "July", "December", "August", "August", "September", "November", "February", "April"
+)
+factor_months_vector <- factor(months)
+print(factor_months_vector)
+```
+
+```{r 3 Summary of Months}
+summary(months)
+summary(factor_months_vector)
+```
+
+```{r 4 Direction and Frequency}
+direction_vector <- c("East", "West", "North")
+frequency_vector <- c(1, 4, 3)
+factor_data <- factor(rep(direction_vector, times = frequency_vector))
+new_order_data <- factor(factor_data, levels = c("East", "West", "North"))
+print(new_order_data)
+```
+
+```{r 5}
+read.table(file = "import_march.csv", sep = ",", header= TRUE, as.is = TRUE)
+```
+
+```{r 6}
+random_number_selection <- function() {
+  random_number <- sample(1:50, 1)
+  if (random_number == 20) {
+    print("TRUE")
+  } else if (random_number < 1 || random_number > 50) {
+    print("The number selected is beyond the range of 1 to 50")
+  } else {
+    print(random_number)
+  }
+}
+random_number_selection()
+```
+
+```{r 7}
+calculate_minimum_bills <- function(price) {
+  if (price %% 1000 == 0) {
+    bills_needed <- price / 1000
+  } else if (price %% 500 == 0) {
+    bills_needed <- price / 500
+  } else if (price %% 200 == 0) {
+    bills_needed <- price / 200
+  } else if (price %% 100 == 0) {
+    bills_needed <- price / 100
+  } else if (price %% 50 == 0) {
+    bills_needed <- price / 50
+  } else {
+    print("Price is not divisible by any of the available bills.")
+    return(NULL)
+  }
+  
+  return(bills_needed)
+}
+
+price_of_snack <- 250 
+minimum_bills <- calculate_minimum_bills(price_of_snack)
+
+if (!is.null(minimum_bills)) {
+  cat("Minimum number of bills needed to purchase the snack:", minimum_bills, "\n")
+}
+```
+
+```{r 8}
+data <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+
+data$Average <- (data$Grade1 + data$Grade2 + data$Grade3 + data$Grade4) / 4
+
+for (i in 1:nrow(data)) {
+  if (data$Average[i] > 90) {
+    cat(data$Name[i], "'s average grade this semester is", round(data$Average[i], 2), ".\n")
+  }
+}
+
+for (i in 1:4) {
+  test_scores <- data[, i + 1]
+  if (mean(test_scores) < 80) {
+    cat("The", i, "th test was difficult.\n")
+  }
+}
+
+
+for (i in 1:nrow(data)) {
+  student <- data[i, ]
+  max_score <- max(student[, -1])  
+  if (max_score > 90) {
+    cat(student$Name, "'s highest grade this semester is", max_score, ".\n")
+  }
+}
+
+```
