@@ -1,0 +1,122 @@
+---
+title: "R Markdown Worksheet#3a"
+author: "Anton"
+date: "2023-10-04"
+output:
+  pdf_document: default
+  html_document: default
+---
+library(tinytex)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r 1a}
+print <- LETTERS[1:11]
+print
+```
+```{r 1b}
+odd_letters <- LETTERS [seq(from = 1, to = length (LETTERS), by = 2)]
+odd_letters
+```
+
+```{r 1c}
+vowels_LETTERS <- c("A", "E", "I", "O", "U")
+vowels_LETTERS
+```
+
+```{r 1d}
+lastfive_letters <- tail(letters, 5)
+lastfive_letters
+```
+
+```{r 1e}
+lowercase_last <- letters[15:24]
+lowercase_last
+```
+
+```{r 2a}
+city <-c ("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island",
+            "Davao City")
+city
+temp <-c ("42", "39", "34", "34", "30", "27")
+temp
+temp_data <- data.frame(City = city, Temperature = temp)
+temp_data
+```
+
+```{r 2e}
+str(temp_data)
+```
+
+```{r 2f}
+print<- temp_data[3:4,1:2]
+print
+```
+
+```{r 2g}
+high_temp_city <- temp_data$City[which.max(temp_data$Temperature)]
+high_temp_city
+lowest_temp_city <- temp_data$City[which.min(temp_data$Temperature)]
+lowest_temp_city
+```
+
+```{r number2ab}
+matrix_num <- matrix(c(1:8, 11:14), nrow = 3, ncol = 4, byrow = TRUE)
+matrix_num
+
+multi_matrix <- matrix_num *2 
+multi_matrix
+```
+
+```{r number2c}
+print <-multi_matrix [2, ]
+print
+```
+
+```{r number2d}
+print <- multi_matrix [1:2, 3:4] 
+print
+```
+
+```{r number2e}
+print <- multi_matrix[3, 2:3]
+print 
+```
+
+```{r number2f}
+print <- multi_matrix[, 4]
+print 
+```
+
+```{r number2g}
+rownames(multi_matrix) <- c("isa", "dalawa", "tatlo")
+colnames(multi_matrix) <- c("uno", "dos", "tres", "quatro")
+multi_matrix
+```
+
+```{r number2h}
+dim(matrix_num) <- c(6, 2)
+matrix_num 
+```
+
+```{r 3a}
+mi_array <- array(c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1),
+                  dim= c(2, 4, 3))
+mi_array
+```
+
+```{r 3b}
+dim_array <- dim(mi_array)
+dim_array
+``` 
+
+```{r 3c}
+dimnames(mi_array) <- list(c(letters[1:2]), c(LETTERS[1:4]),c("1st Dimensional Array", "2nd Dimensional Array", "3rd Dimensional Array"))
+mi_array
+```
+
+
+
