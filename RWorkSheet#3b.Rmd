@@ -1,0 +1,142 @@
+1. Create a data frame using the table below.
+a. Write the codes.
+```{r number1 }
+Household <- data.frame(
+  Respondents = 1:20,
+  Sex = c(2,2,1,rep(2,7),1,rep(2,7),1,2),
+  Fathers_Occupation = c(1, rep(3,3),1:3,rep(1,3), (3:1),3,3,1,3,1,2,1),
+  Persons_at_Home = c(5,7,3,8,5,9,6,7,8,4,7,5,4,7,8,8,3,11,7,6),
+  Siblings_at_School = c(6,4,4,1,2,1,5,3,1,2,3,2,5,5,2,1,2,5,3,2),
+  Types_of_Houses = c(1:3,1,1,3,3,1:3,2,3,2,2,rep(3,5),2)
+)
+Household
+```
+b. Describe the data. Get the structure or the summary of the data
+```{r summary}
+summary(Household)
+str(Household)
+```
+c. Is the mean number of siblings attending is 5?
+```{r}
+mean_siblings_attending <- mean(Household$Siblings_at_School)
+mean_siblings_attending == 5
+```
+
+d. Extract the 1st two rows and then all the columns using the subsetting functions.
+Write the codes and its output.
+```{r}
+subset1 <- Household[1:2, ]
+subset1
+```
+
+e. Extract 3rd and 5th row with 2nd and 4th column. Write the codes and its result.
+```{r}
+subset2 <- Household[c(3, 5), c(2, 4)]
+subset2
+```
+
+f. Select the variable types of houses then store the vector that results as types_houses.
+Write the codes.
+```{r}
+types_houses <- Household$Types_of_Houses
+types_houses
+```
+g. Select only all Males respondent that their father occupation was farmer. Write the
+codes and its output.
+```{r}
+male_farmers <- Household[Household$Sex == 1 & Household$Fathers_Occupation == 1, ]
+male_farmers
+```
+
+h. Select only all females respondent that have greater than or equal to 5 number of
+siblings attending school. Write the codes and its outputs.
+```{r}
+female_greater_than_5_siblings <- Household[Household$Sex == 2 & Household$Siblings_at_School >= 5, ]
+female_greater_than_5_siblings
+```
+
+2. Write a R program to create an empty data frame. Using the following codes:
+df = data.frame(Ints=integer(),
+
+Doubles=double(), Characters=character(),
+Logicals=logical(),
+Factors=factor(),
+stringsAsFactors=FALSE)
+
+print("Structure of the empty dataframe:")
+print(str(df))
+```{r}
+df = data.frame(
+  Ints = integer(),
+  Doubles = double(),
+  Characters = character(),
+  Logicals = logical(),
+  Factors = factor(),
+  stringsAsFactors = FALSE
+)
+```
+
+a. Describe the results.
+```{r}
+print("Structure of the empty dataframe:")
+print(str(df))
+```
+
+3. Create a .csv file of this. Save it as your_data.csv
+```{r}
+library(readr)
+your_data <- read_csv("HouseholdData.csv")
+View(your_data)
+```
+
+a. Import the csv file into the R environment. Write the codes.
+```{r}
+your_data <- read_csv("HouseholdData.csv")
+```
+
+b. Convert the Sex into factor using factor() function and change it into integer.[Legend:
+Male = 1 and Female = 2]. Write the R codes and its output.
+```{r}
+your_data$Sex <- factor(your_data$Sex, levels = c("Male", "Female"))
+your_data$Sex <- as.integer(your_data$Sex)
+your_data$Sex
+```
+
+c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood
+= 1; Congrete = 2; Semi-Congrete = 3]. Write the R codes and its output.
+```{r}
+your_dataTypeofHouses <- factor(your_data$TypeofHouses, levels = c("Wood", "Concrete", "Semi-concrete"),c(1,2,3))
+
+your_dataTypeofHouses
+```
+
+d. On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What
+is the R code and its output?
+```{r}
+legend_fathers_occupation <- c("Farmer", "Driver", "Others")
+
+your_dataFathers_Occupation <- factor(your_data$'Fathers Occupation', levels= c("1","2","3"), c("Farmer", "Driver", "Others"))
+
+
+your_dataFathers_Occupation
+```
+
+e. Select only all females respondent that has a father whose occupation is driver. Write
+the codes and its output.
+```{r}
+female_drivers <- your_data[your_data$Sex == 2 & your_dataFathers_Occupation == 2, ]
+female_drivers
+```
+
+f. Select the respondents that have greater than or equal to 5 number of siblings attending
+school. Write the codes and its output.
+```{r}
+more_than_5_siblings <- your_data[your_data$'Siblings at School' >= 5, ]
+more_than_5_siblings
+```
+
+4. Interpret the graph.
+```{r}
+#NUMBER 3 INTERPRET PARAGRAPH
+#The graph consistently shows that the negative sentiments are the  greatest in number, The neutral being the least and the positive sentiments in the middle. The greatest value of negative sentiments was recorded on July 15, 2020 also. All of the sentiments least number were all recorded on July 20, 2020
+```
