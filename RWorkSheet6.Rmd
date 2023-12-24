@@ -1,0 +1,118 @@
+---
+title: "Untitled"
+author: "Anton Geganzo"
+date: "2023-12-06"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r N1}
+#install.packages("Hmisc")
+#install.packages("pastecs")
+library(Hmisc)
+library(pastecs)
+
+student <- c(1:10)
+pretest <- c(55,54,47,57,51,61,57,54,63,58)
+postest <- c(61,60,56,63,56,63,59,56,62,61)
+
+testdf <- data.frame(student,pretest,postest)
+describe(testdf)
+stat.desc(testdf)
+```
+
+```{r N2}
+fertilizerlevels <- c("low","medium","high","low","medium","high")
+orderedfertilizer <- factor(fertilizerlevels, ordered = TRUE, levels = c("low","medium","high"))
+str(orderedfertilizer)
+
+fertilizer_levels <- c(10,10,10,20,20,50,10,50,20,50,20,10)
+ordered_fertilizer <- factor(fertilizerlevels, ordered = TRUE)
+str(ordered_fertilizer)
+
+```
+
+```{r N3}
+
+#3 You can use a factor to represent the levels undertaken by 10 subjects.
+
+ExrLvl <- c("l", "n", "n", "i", "l", "l", "n", "n", "i", "l")
+
+ExrFact <- factor(ExrLvl, levels = c("n", "l", "i"), labels = c("none", "light", "intense"))
+
+print(ExrFact)
+```
+
+```{r N4}
+
+state <- c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa", "qld",
+           "vic", "nsw", "vic", "qld", "qld", "sa", "tas", "sa", "nt",
+           "wa", "vic", "qld", "nsw", "nsw", "wa", "sa", "act", "nsw",
+           "vic", "vic", "act")
+
+StateFact<- factor(state)
+print(StateFact)
+#The results provide the different "Levels" provided in the vector.
+```
+
+```{r N5}
+#5.
+incomes <- c(60, 49, 40, 61, 64, 60, 59, 54,
+             62, 69, 70, 42, 56, 61, 61, 61, 58, 51, 48,
+             65, 49, 49, 41, 48, 52, 46, 59, 46, 58, 43)
+#a. Sample Mean
+
+incmeans <- tapply(incomes, StateFact, mean)
+print(incmeans)
+
+#b. The results show the mean for each state provided 
+```
+
+```{r N6}
+#6.
+#stdError <- function(x) sqrt(var(x)/length(x))
+#incster <- tapply(incomes, statef, stdError)
+
+#a. The standard error is that the object 'statef' is not found as the vector was named as 'state'.
+```
+
+```{r N7}
+#7.
+#install.packages("titanic")
+library(titanic)
+data("titanic_train")
+titanic_data <- titanic_train
+
+
+Survived <- subset(titanic_data, Survived == 1)
+NotSurvived <- subset(titanic_data, Survived == 0)
+
+print(Survived)
+print(NotSurvived)
+```
+
+```{r N8}
+#8.
+#install.packages("readr")
+library(readr)
+breastcancer_wisconsin <- read_csv("breastcancer_wisconsin.csv")
+print(breastcancer_wisconsin)
+
+#a. The dataset is all about the recorded data of people that have breast cancer and its characteristics.
+
+
+```
+
+``` {r num9}
+#install.packages("xlsx")
+library(xlsx)
+abalone<- read.csv("abalone.csv")
+xlsx::write.xlsx(abalone, "abalone.xls", col.names=TRUE, row.names=TRUE, sheetName="sample")
+#install.packages("AppliedPredictiveModeling")
+library("AppliedPredictiveModeling")
+head(abalone)
+summary(abalone)
+```
